@@ -242,6 +242,9 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                        {% endif %}
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
@@ -250,7 +253,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>#}
-                        <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-sign-out fa-fw"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -275,16 +278,16 @@
                             <!-- /input-group -->
                         </li>#}
                         <li>
-                            <a href="index.html"><i class="fa fa-institution fa-fw"></i> Inicio</a>
+                            <a href="{{ path('udec_app_homepage') }}"><i class="fa fa-institution fa-fw"></i> Inicio</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-folder-open-o fa-fw"></i> Trabajos de Grado<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Nuevo</a>
+                                    <a href="{{ path('udec_app_trabajos_nuevo') }}">Nuevo</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Buscar Trabajos</a>
+                                    <a href="{{ path('udec_app_trabajos_buscar') }}">Buscar Trabajos</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -293,10 +296,10 @@
                             <a href="#"><i class="fa fa-users fa-fw"></i> Personas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Nuevo</a>
+                                    <a href="{{ path('udec_app_personas_nuevo') }}">Nuevo</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Buscar Persona</a>
+                                    <a href="{{ path('udec_app_personas_buscar') }}">Buscar Persona</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -305,13 +308,13 @@
                             <a href="#"><i class="fa fa-gears fa-fw"></i> Maestros<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="flot.html">Sedes</a>
+                                    <a href="#">Sedes</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Clasificaciones</a>
+                                    <a href="#">Clasificaciones</a>
                                 </li>
                                 <li>
-                                    <a href="morris.html">Programas</a>
+                                    <a href="#">Programas</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

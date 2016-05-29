@@ -1,3 +1,19 @@
 udec_app_homepage:
     path:     /
     defaults: { _controller: UdecAppBundle:Default:index }
+
+udec_app_trabajos_nuevo:
+    path:     /trabajo/nuevo
+    defaults: { _controller: UdecAppBundle:Trabajos:nuevo }
+    
+udec_app_trabajos_buscar:
+    path:     /trabajo/buscar
+    defaults: { _controller: UdecAppBundle:Trabajos:buscar }
+
+udec_app_personas_nuevo:
+    path:     /persona/nuevo
+    defaults: { _controller: UdecAppBundle:Personas:nuevo }
+
+udec_app_personas_buscar:
+    path:     /persona/buscar
+    defaults: { _controller: UdecAppBundle:Personas:buscar }
