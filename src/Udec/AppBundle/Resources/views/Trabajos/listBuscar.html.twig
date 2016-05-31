@@ -1,0 +1,18 @@
+    {% if info %}
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Titulo</th>
+                <th></th>
+            </tr>
+            {% for tb in info %}
+            <tr>
+                <td>{{ tb.idTrabajo }}</td>
+                <td>{{ tb.fechaTrabajo }}</td>
+                <td>{{ tb.tituloTrabajo }}</td>
+                <td><a href="#" class="btn btn-info btn-sm">ver</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}

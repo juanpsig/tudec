@@ -5,7 +5,7 @@
         <div class="col-lg-12"><p> </p> </div>
         <div class="col-lg-10">
             <div class="input-group custom-search-form">
-                <input type="text" class="form-control" placeholder="Buscar trabajo..." autofocus>
+                <input type="text" id="buscador" name="buscador" class="form-control" placeholder="Buscar trabajo..." autofocus>
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button">
                         <i class="fa fa-search"></i>
@@ -13,5 +13,43 @@
                 </span>
             </div>
         </div>
+        <div class="col-lg-12"><p> </p> </div>
+        <div class="col-lg-12"><p> </p> </div>
     </div>
+    <div id="areaContenido" class="row">
+        {% if info %}
+            <table class="table">
+                <tr>
+                    <th>Id</th>
+                    <th>Fecha</th>
+                    <th>Titulo</th>
+                    <th></th>
+                </tr>
+                {% for tb in info %}
+                <tr>
+                    <td>{{ tb.idTrabajo }}</td>
+                    <td>{{ tb.fechaTrabajo }}</td>
+                    <td>{{ tb.tituloTrabajo }}</td>
+                    <td><a href="#" class="btn btn-info btn-sm">ver</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block scriptModulo %}
+    <script>
+        var accion = {
+            buscar: function(){
+                $('#areaContenido').html('Buscando...')
+                $('#areaContenido').load('{{ path("udec_app_trabajos_buscar") }}',{acc:'buscar',txtkey:$('#buscador').val()});
+            }
+        };
+        $('#buscador').keypress(function(e){   
+            if(e.which == 13){      
+                accion.buscar();      
+            }   
+        });
+    </script>
 {% endblock %}
