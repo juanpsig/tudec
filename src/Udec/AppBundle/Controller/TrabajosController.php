@@ -18,7 +18,9 @@ use Symfony\Component\HttpFoundation\Response;
 class TrabajosController extends Controller {
     
     public function nuevoAction(){
-        return $this->render('UdecAppBundle:Trabajos:nuevo.html.twig');
+        $info['carreras'] = $this->get('trabajos')->getInfoCarreras();
+        $info['clasificacion'] = $this->get('trabajos')->getInfoClasificacion();
+        return $this->render('UdecAppBundle:Trabajos:nuevo.html.twig',$info);
     }
     
     public function buscarAction(){

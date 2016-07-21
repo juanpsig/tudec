@@ -65,3 +65,11 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Udec\AppBundle\Entity\Usuarios
+
+services:
+    funciones:
+        class:        Udec\AppBundle\includes\funciones
+        arguments:    [@service_container,@doctrine.orm.entity_manager]
+    trabajos:
+        class:        Udec\AppBundle\includes\trabajos
+        arguments:    [@service_container,@doctrine.orm.entity_manager,@funciones]
