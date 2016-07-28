@@ -1,0 +1,8 @@
+{% if lista %}
+    {% for persona in lista %}
+        <div><strong><a href="javascript:accion.agregarAutor({{ persona.id }})">{{ persona.nombre }} {{ persona.apellidos }}</a></strong></div>
+        <input type="hidden" id="infoItemAutor{{ persona.id }}" value="{{ persona.nombre }} {{ persona.apellidos }}">
+    {% endfor %}
+{% else %}
+    <div>No hay registros</div>
+{% endif %}
