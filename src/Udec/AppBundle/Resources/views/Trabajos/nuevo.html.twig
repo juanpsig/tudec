@@ -18,12 +18,12 @@
                 </div>
                 <div class="form-group col-lg-4">
                     <label>Fecha Graduación:</label>
-                    <input id="dconcepto" name="dconcepto" class="form-control">
+                    <input id="dfechaGrado" name="dfechaGrado" class="form-control">
                     <p class="help-block">AAAA-MM-DD</p>
                 </div>
                 <div class="form-group col-lg-3">
                     <label>Carrera:</label>
-                    <select class="form-control">
+                    <select id="dcarrera" class="form-control">
                         {% for carrera in carreras %}
                             <option value="{{ carrera.idCarrera }}">{{ carrera.nombreCarrera }}</option>
                         {% endfor %}
@@ -31,7 +31,7 @@
                 </div>
                 <div class="form-group col-lg-3">
                     <label>Clasificación:</label>
-                    <select class="form-control">
+                    <select id="dclasificacion" class="form-control">
                         {% for infoc in clasificacion %}
                             <option value="{{ infoc.id }}">{{ infoc.nombre }}</option>
                         {% endfor %}
@@ -50,23 +50,29 @@
                             </button>
                         </span>
                     </div>
-                    <div id="resultAutores">
-                        
+                    <div id="resultAutores">                      
                     </div>
                 </div>
                 <div class="form-group col-lg-12">
                     <label>Asesor:</label>
                 </div>
+                <div id="asesoresAgregados" class="form-group col-lg-12"></div>
                 <div class="col-lg-12">
                     <div class="form-group input-group">
                         <input id="textAsesorTrabajo" name="textAsesorTrabajo" type="text" class="form-control" placeholder="Buscar autores del trabajo">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                            <button class="btn btn-default" type="button" onclick="accion.buscarAsesor()">
+                                <i class="fa fa-search"></i>
                             </button>
                         </span>
                     </div>
+                    <div id="resultAsesores">                      
+                    </div>
                 </div>
             </form>
+            <div class="form-group col-lg-12">
+                <a class="btn btn-primary" href="javascript:accion.crearTrabajo()">Aceptar</a>
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -75,6 +81,7 @@
     <script>
         var accion = {
             autores:{},
+            asesores:{},
             buscar: function(){
                 $('#areaContenido').html('Buscando...')
                 $('#areaContenido').load('{{ path("udec_app_trabajos_buscar") }}',{acc:'buscar',txtkey:$('#buscador').val()});
@@ -85,11 +92,57 @@
                 $('#resultAutores').load('{{ path("udec_app_personas_buscar") }}',{acc:'buscarAutor',texto:buscar});
             },
             agregarAutor: function(idPersona){
-                accion.autores['id'+idPersona]=idPersona;
                 var htmlPersona = $('#infoItemAutor'+idPersona).val();
-                $('#autoresAgregados').append('[<i class="fa fa-user"></i> '+htmlPersona+'] ');
+                accion.autores[idPersona]={id:idPersona,nombre:htmlPersona};
                 $('#resultAutores').html('');
-                console.log(accion.autores);
+                accion.listarAutores();
+            },
+            quitarAutor: function(idPersona){
+                delete accion.autores[idPersona];
+                accion.listarAutores();
+            },      
+            listarAutores:function(){
+                $('#autoresAgregados').html('');
+                $.each(accion.autores,function(inx,vlr){
+                    $('#autoresAgregados').append('[<i class="fa fa-user"></i> '+vlr.nombre+' <a href="javascript:accion.quitarAutor(\''+vlr.id+'\')"><i class="fa fa-close"></i></a>] ');
+                });
+            },
+            buscarAsesor:function(){
+                var buscar = $('#textAsesorTrabajo').val();
+                $('#resultAsesores').html('Buscando...');
+                $('#resultAsesores').load('{{ path("udec_app_personas_buscar") }}',{acc:'buscarAsesor',texto:buscar});
+            },
+            agregarAsesor: function(idPersona){
+                var htmlPersona = $('#infoItemAsesor'+idPersona).val();
+                accion.asesores[idPersona]={id:idPersona,nombre:htmlPersona};
+                $('#resultAsesores').html('');
+                accion.listarAsesores();
+            },
+            quitarAsesor: function(idPersona){
+                delete accion.asesores[idPersona];
+                accion.listarAsesores();
+            },      
+            listarAsesores:function(){
+                $('#asesoresAgregados').html('');
+                $.each(accion.asesores,function(inx,vlr){
+                    $('#asesoresAgregados').append('[<i class="fa fa-user"></i> '+vlr.nombre+' <a href="javascript:accion.quitarAsesor(\''+vlr.id+'\')"><i class="fa fa-close"></i></a>] ');
+                });
+            },
+            crearTrabajo:function(){
+                var datos = {titulo:$('#dtitulo').val(),concepto:$('#dconcepto').val(),fechaGrado:$('#dfechaGrado').val(),carrera:$('#dcarrera').val(),clasificacion:$('#dclasificacion').val(),autores:accion.autores,asesores:accion.asesores};
+                $.post('{{ path("udec_app_trabajos_crear") }}',{datos:datos},function(res){
+                    try{
+                        var data = JSON.parse(res);
+                    }catch(e){
+                        var data = {estado:false};
+                    }
+                    if(data.estado){
+                        alert('enviar pantalla para adjuntar documentos');
+                    }else{
+                        alert('error al crear el trabajo');
+                    }
+                });
+                
             }
         };
         $('#buscador').keypress(function(e){   

@@ -1,7 +1,13 @@
 {% if lista %}
     {% for persona in lista %}
-        <div><strong><a href="javascript:accion.agregarAutor({{ persona.id }})">{{ persona.nombre }} {{ persona.apellidos }}</a></strong></div>
-        <input type="hidden" id="infoItemAutor{{ persona.id }}" value="{{ persona.nombre }} {{ persona.apellidos }}">
+        {% if acc == 'buscarAutor' %}
+            <div><strong><a href="javascript:accion.agregarAutor({{ persona.id }})">{{ persona.nombre }} {{ persona.apellidos }}</a></strong></div>
+            <input type="hidden" id="infoItemAutor{{ persona.id }}" value="{{ persona.nombre }} {{ persona.apellidos }}">
+        {% endif %}
+        {% if acc == 'buscarAsesor' %}
+            <div><strong><a href="javascript:accion.agregarAsesor({{ persona.id }})">{{ persona.nombre }} {{ persona.apellidos }}</a></strong></div>
+            <input type="hidden" id="infoItemAsesor{{ persona.id }}" value="{{ persona.nombre }} {{ persona.apellidos }}">
+        {% endif %}
     {% endfor %}
 {% else %}
     <div>No hay registros</div>

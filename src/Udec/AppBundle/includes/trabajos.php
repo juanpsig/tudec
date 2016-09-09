@@ -4,6 +4,12 @@ namespace Udec\AppBundle\includes;
 use Symfony\Component\DependencyInjection\ContainerInterface as Container;
 use Doctrine\ORM\EntityManager;
 use Udec\AppBundle\includes\funciones;
+
+use Udec\AppBundle\Entity\Trabgrado;
+use Udec\AppBundle\Entity\Clasificaciontg;
+use Udec\AppBundle\Entity\Programas;
+
+
 /**
  * Maneja las actividades relacionadas con los trabajos
  *
@@ -48,6 +54,29 @@ class trabajos {
         return $con->fetchAll();
     }
     
+    public function crearTrabajo($datos){
+        $clasificacion = $this->getClasificacion($datos['clasificacion']);
+        $programa = $this->getPrograma($datos['carrera']);
+        $trabajo = new Trabgrado();
+        $trabajo->setConcepto($datos['concepto']);
+        $trabajo->setEstado('1');
+        $trabajo->setFechaRg(new \DateTime(date("Y-m-d H:i:s")));
+        $trabajo->setFechaGrado(new \DateTime($datos['fechaGrado']));
+        $trabajo->setIdClasificacion($clasificacion);
+        $trabajo->setIdPrograma($programa);
+        $trabajo->setTitulo($datos['titulo']);
+        $this->em->persist($trabajo);
+        $this->em->flush();
+    return $trabajo;
+    }
     
+    public function getClasificacion($id){
+        return $this->em->getRepository('UdecAppBundle:Clasificaciontg')->find($id);
+    }
+    
+    public function getPrograma($id){
+        return $this->em->getRepository('UdecAppBundle:Programas')->find($id);
+    }
+       
     
 }

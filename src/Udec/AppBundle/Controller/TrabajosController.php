@@ -35,6 +35,15 @@ class TrabajosController extends Controller {
         }
     }
     
+    public function crearAction(){
+        $rqt = $this->get("request");
+        $info = $this->get('trabajos')->crearTrabajo($rqt->get('datos'));
+        if($info){
+            return new Response(json_encode(array('estado'=>true,'idTrabajo'=>$info->getId())));
+        }
+        return new Response('',404);
+    }
+    
     public function queryTrabajos($where){
         $em = $this->getDoctrine()->getManager();
         $query = "SELECT tb.id idTrabajo,tb.fecha_rg fechaTrabajo,tb.titulo tituloTrabajo,tb.concepto conceptoTrabajo,tb.fecha_grado fechaGradoTRabajo

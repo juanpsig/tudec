@@ -30,7 +30,7 @@ class PersonasController extends Controller {
         if($rqt->get('texto')){
             $buscar = '+'.str_replace(' ','* +',$rqt->get('texto')).'*';
             $personas = $this->queryPersonas("WHERE MATCH(primer_nombre,segundo_nombre,primer_apellido,segundo_apellido,codigo,email,telefono_fijo,movil,numero_doc) AGAINST('$buscar' IN BOOLEAN MODE)");
-            return $this->render('UdecAppBundle:Personas:listaPersonas.html.twig',array('lista'=>$personas));
+            return $this->render('UdecAppBundle:Personas:listaPersonas.html.twig',array('acc'=>$rqt->get('acc'),'lista'=>$personas));
         }
         return new Response('',404);
     }
