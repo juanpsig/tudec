@@ -67,7 +67,7 @@ class trabajos {
         $trabajo->setTitulo($datos['titulo']);
         $this->em->persist($trabajo);
         $this->em->flush();
-    return $trabajo;
+        return $trabajo;
     }
     
     public function getClasificacion($id){

@@ -114,7 +114,7 @@
             },
             agregarAsesor: function(idPersona){
                 var htmlPersona = $('#infoItemAsesor'+idPersona).val();
-                accion.asesores[idPersona]={id:idPersona,nombre:htmlPersona};
+                accion.asesores[idPersona]={id:idPersona,nombre:htmlPersona,tipo:''};
                 $('#resultAsesores').html('');
                 accion.listarAsesores();
             },

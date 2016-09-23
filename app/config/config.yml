@@ -73,3 +73,9 @@ services:
     trabajos:
         class:        Udec\AppBundle\includes\trabajos
         arguments:    [@service_container,@doctrine.orm.entity_manager,@funciones]
+    personas:
+        class:        Udec\AppBundle\includes\personas
+        arguments:    [@service_container,@doctrine.orm.entity_manager,@funciones]
+    maestros:
+        class:        Udec\AppBundle\includes\maestros
+        arguments:    [@service_container,@doctrine.orm.entity_manager,@funciones]
