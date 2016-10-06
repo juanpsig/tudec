@@ -37,9 +37,11 @@ class TrabajosController extends Controller {
     
     public function crearAction(){
         $rqt = $this->get("request");
-        $info = $this->get('trabajos')->crearTrabajo($rqt->get('datos'));
-        if($info){
-            return new Response(json_encode(array('estado'=>true,'idTrabajo'=>$info->getId())));
+        $trabajo = $this->get('trabajos')->crearTrabajo($rqt->get('datos'));
+        if($trabajo){
+            $this->get("trabajos")->agregarAutores($trabajo,$rqt->get('datos'));
+            $this->get("trabajos")->agregarAsesores($trabajo,$rqt->get('datos'));
+            return new Response(json_encode(array('estado'=>true,'idTrabajo'=>$trabajo->getId())));
         }
         return new Response('',404);
     }
@@ -57,5 +59,27 @@ class TrabajosController extends Controller {
         $con = $em->getConnection()->executeQuery($query);
         $con->execute();
         return $con->fetchAll();
+    }
+    
+    public function adjuntarAction($idTrabajo){
+        $infoTrabajo = $this->get("trabajos")->getInfoTrabajo($idTrabajo);
+        $info = array('idTrabajo'=>$idTrabajo,'trabajo'=>$infoTrabajo);
+        return $this->render('UdecAppBundle:Trabajos:adjuntar.html.twig',$info);
+    }
+    
+    public function adjuntarDocsAction($idTrabajo){
+        $rqt = $this->get('request');
+        $path = 'adjuntos/';
+        $trabajo = $this->get("trabajos")->getTrabajo($idTrabajo);
+        if($trabajo){
+            $archivo = $rqt->files->get('resumen');
+            $docs['resumen'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
+            $archivo = $rqt->files->get('abstrac');
+            $docs['abstrac'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
+            $archivo = $rqt->files->get('articulo');
+            $docs['articulo'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
+            $this->get("trabajos")->guardarDocumentos($trabajo,$docs);
+        }
+        return new Response('ok');
     }
 }

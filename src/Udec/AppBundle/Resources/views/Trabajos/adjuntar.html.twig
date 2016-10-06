@@ -1,0 +1,56 @@
+{% extends '::index.html.twig' %}
+{% block contenido %}
+    <div class="col-lg-12">
+        <h3 class="page-header">Adjuntando documentos {{ trabajo.tituloTrabajo }}</h3>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="col-md-12">
+                Resumen: <input type="file" name="resumen" id="resumen" />
+            </div>
+            <div class="col-md-12">
+                Abstrac: <input type="file" name="abstrac" id="abstrac" />
+            </div>
+            <div class="col-md-12">
+                Articulo: <input type="file" name="articulo" id="articulo" />
+            </div>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p>&nbsp;</p>
+            <p>
+                &nbsp;&nbsp;&nbsp; <button class="btn btn-warning" onclick="uploadAjax()">Adjuntar Documentos</button>
+            </p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scriptModulo %}
+<script>
+    function uploadAjax(){
+        var inputFile = document.getElementById("resumen");
+        var resumen = inputFile.files[0];
+        inputFile = document.getElementById("abstrac");
+        var abstrac = inputFile.files[0];
+        inputFile = document.getElementById("articulo");
+        var articulo = inputFile.files[0];
+        
+        var data = new FormData();
+        data.append('resumen',resumen);
+        data.append('abstrac',abstrac);
+        data.append('articulo',articulo);
+        
+        var url = "{{ path("udec_app_trabajos_adjuntar_docs",{'idTrabajo':idTrabajo}) }}";
+        $.ajax({
+            url:url,
+            type:'POST',
+            contentType:false,
+            data:data,
+            processData:false,
+            cache:false
+        });
+    }
+</script>
+{% endblock %}

@@ -21,4 +21,16 @@ class personas {
         $this->em = $em;
         $this->funciones = $funciones;
     }
+    
+    public function getPersona($id){
+        return $this->em->getRepository('UdecAppBundle:Personas')->find($id);
+    }
+    
+    public function getPersonaBy($by){
+        return $this->em->getRepository('UdecAppBundle:Personas')->findBy($by);
+    }
+    
+    public function getPersonaOneBy($by){
+        return $this->em->getRepository('UdecAppBundle:Personas')->findOneBy($by);
+    }
 }

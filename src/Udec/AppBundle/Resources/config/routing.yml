@@ -9,7 +9,19 @@ udec_app_trabajos_nuevo:
 udec_app_trabajos_crear:
     path:     /trabajo/crear
     defaults: { _controller: UdecAppBundle:Trabajos:crear }
-    
+
+udec_app_trabajos_adjuntar_base:
+    path:     /trabajo/adjuntar
+    defaults: { _controller: UdecAppBundle:Trabajos:index }
+
+udec_app_trabajos_adjuntar_trabajo:
+    path:     /trabajo/adjuntar/{idTrabajo}
+    defaults: { _controller: UdecAppBundle:Trabajos:adjuntar }
+
+udec_app_trabajos_adjuntar_docs:
+    path:     /trabajo/adjuntar/{idTrabajo}/docs
+    defaults: { _controller: UdecAppBundle:Trabajos:adjuntarDocs }
+
 udec_app_trabajos_buscar:
     path:     /trabajo/buscar
     defaults: { _controller: UdecAppBundle:Trabajos:buscar }
