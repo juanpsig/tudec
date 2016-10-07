@@ -14,6 +14,21 @@
             <div class="col-md-12">
                 Articulo: <input type="file" name="articulo" id="articulo" />
             </div>
+            <div class="col-md-12">
+                Documento: <input type="file" name="documento" id="documento" />
+            </div>
+            <div class="col-md-12">
+                Manual de Usuario: <input type="file" name="manualu" id="manualu" />
+            </div>
+            <div class="col-md-12">
+                Manual Técnico: <input type="file" name="manualt" id="manualt" />
+            </div>
+            <div class="col-md-12">
+                Código fuente: <input type="file" name="codigof" id="codigof" />
+            </div>
+            <div class="col-md-12">
+                Software: <input type="file" name="soft" id="soft" />
+            </div>
             
         </div>
     </div>
@@ -36,11 +51,26 @@
         var abstrac = inputFile.files[0];
         inputFile = document.getElementById("articulo");
         var articulo = inputFile.files[0];
+        inputFile = document.getElementById("documento");
+        var documento = inputFile.files[0];
+        inputFile = document.getElementById("soft");
+        var soft = inputFile.files[0];
+        inputFile = document.getElementById("codigof");
+        var codigof = inputFile.files[0];
+        inputFile = document.getElementById("manualt");
+        var manualt = inputFile.files[0];
+        inputFile = document.getElementById("manualu");
+        var manualu = inputFile.files[0];
         
         var data = new FormData();
         data.append('resumen',resumen);
         data.append('abstrac',abstrac);
         data.append('articulo',articulo);
+        data.append('documento',documento);
+        data.append('soft',soft);
+        data.append('codigof',codigof);
+        data.append('manualt',manualt);
+        data.append('manualu',manualu);
         
         var url = "{{ path("udec_app_trabajos_adjuntar_docs",{'idTrabajo':idTrabajo}) }}";
         $.ajax({

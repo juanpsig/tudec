@@ -6,6 +6,10 @@ udec_app_trabajos_nuevo:
     path:     /trabajo/nuevo
     defaults: { _controller: UdecAppBundle:Trabajos:nuevo }
 
+udec_app_trabajos_ver:
+    path:     /trabajo/crear
+    defaults: { _controller: UdecAppBundle:Trabajos:ver }
+
 udec_app_trabajos_crear:
     path:     /trabajo/crear
     defaults: { _controller: UdecAppBundle:Trabajos:crear }

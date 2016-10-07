@@ -61,6 +61,15 @@ class TrabajosController extends Controller {
         return $con->fetchAll();
     }
     
+    public function verAction(){
+        $rqt = $this->get("request");
+        $infoTrabajo = $this->get("trabajos")->getInfoTrabajo($rqt->get('idTrabajo'));
+        if($infoTrabajo){
+            return $this->render('UdecAppBundle:Trabajos:infoTrabajo.html.twig',$infoTrabajo);
+        }
+        return new Response('');
+    }
+
     public function adjuntarAction($idTrabajo){
         $infoTrabajo = $this->get("trabajos")->getInfoTrabajo($idTrabajo);
         $info = array('idTrabajo'=>$idTrabajo,'trabajo'=>$infoTrabajo);
@@ -78,6 +87,17 @@ class TrabajosController extends Controller {
             $docs['abstrac'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
             $archivo = $rqt->files->get('articulo');
             $docs['articulo'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
+            $archivo = $rqt->files->get('documento');
+            $docs['documento'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
+            $archivo = $rqt->files->get('soft');
+            $docs['soft'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
+            $archivo = $rqt->files->get('codigof');
+            $docs['codigof'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
+            $archivo = $rqt->files->get('manualt');
+            $docs['manualt'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
+            $archivo = $rqt->files->get('manualu');
+            $docs['manualu'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
+            
             $this->get("trabajos")->guardarDocumentos($trabajo,$docs);
         }
         return new Response('ok');

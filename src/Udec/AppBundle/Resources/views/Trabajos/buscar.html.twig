@@ -7,7 +7,7 @@
             <div class="input-group custom-search-form">
                 <input type="text" id="buscador" name="buscador" class="form-control" placeholder="Buscar trabajo..." autofocus>
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">
+                    <button class="btn btn-default" type="button" onclick="accion.buscar()">
                         <i class="fa fa-search"></i>
                     </button>
                 </span>
@@ -30,7 +30,7 @@
                     <td>{{ tb.idTrabajo }}</td>
                     <td>{{ tb.fechaTrabajo }}</td>
                     <td>{{ tb.tituloTrabajo }}</td>
-                    <td><a href="#" class="btn btn-info btn-sm">ver</a></td>
+                    <td><a href="javascript:accion.verTrabajo('{{ tb.idTrabajo }}')" class="btn btn-info btn-sm">ver</a></td>
                 </tr>
                 {% endfor %}
             </table>
@@ -42,8 +42,12 @@
     <script>
         var accion = {
             buscar: function(){
-                $('#areaContenido').html('Buscando...')
+                $('#areaContenido').html('Buscando...');
                 $('#areaContenido').load('{{ path("udec_app_trabajos_buscar") }}',{acc:'buscar',txtkey:$('#buscador').val()});
+            },
+            verTrabajo:function(idTrabajo){
+                $('#areaContenido').html('Cargando...');
+                $('#areaContenido').load('{{ path("udec_app_trabajos_ver") }}',{acc:'verTrabajo',idTrabajo:idTrabajo});
             }
         };
         $('#buscador').keypress(function(e){   

@@ -41,6 +41,10 @@ class trabajos {
     public function getTrabajoOneBy($by){
         return $this->em->getRepository('UdecAppBundle:Trabgrado')->findOneBy($by);
     }
+    
+    public function getAdjuntosOneBy($by){
+        return $this->em->getRepository('UdecAppBundle:Archivostg')->findOneBy($by);
+    }
 
     public function getInfoCarreras(){
         $query = "SELECT pg.id idCarrera,pg.nombre nombreCarrera,sd.id idSede,sd.nombre nombreSede
@@ -163,9 +167,11 @@ class trabajos {
         $arc->setArticulo($docs['articulo']);
         $arc->setAbstrc($docs['abstrac']);
         $arc->setResumen($docs['resumen']);
-        //$arc->setManualUsr($docs['']);
-        //$arc->setManualTecn($docs['']);
-        //$arc->setSoftware($docs['']);
+        $arc->setDoc($docs['documento']);
+        $arc->setManualUsr($docs['manualu']);
+        $arc->setManualTecn($docs['manualt']);
+        $arc->setSoftware($docs['soft']);
+        $arc->setCodigoSw($docs['codigof']);
         $this->em->persist($arc);
         $this->em->flush();
         return $arc;
