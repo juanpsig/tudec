@@ -1,0 +1,47 @@
+{% extends '::index.html.twig' %}
+{% block contenido %}
+    <h1>Sedes</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sede.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ sede.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Tiposede</th>
+                <td>{{ sede.tipoSede }}</td>
+            </tr>
+            <tr>
+                <th>Municipio</th>
+                <td>{{ sede.municipio }}</td>
+            </tr>
+            <tr>
+                <th>Departamento</th>
+                <td>{{ sede.departamento }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{{ sede.estado }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('sedes_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('sedes_edit', { 'id': sede.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

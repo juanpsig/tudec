@@ -1,0 +1,24 @@
+sedes_index:
+    path:     /
+    defaults: { _controller: "UdecAppBundle:Sedes:index" }
+    methods:  GET
+
+sedes_show:
+    path:     /{id}/show
+    defaults: { _controller: "UdecAppBundle:Sedes:show" }
+    methods:  GET
+
+sedes_new:
+    path:     /new
+    defaults: { _controller: "UdecAppBundle:Sedes:new" }
+    methods:  [GET, POST]
+
+sedes_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "UdecAppBundle:Sedes:edit" }
+    methods:  [GET, POST]
+
+sedes_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "UdecAppBundle:Sedes:delete" }
+    methods:  DELETE

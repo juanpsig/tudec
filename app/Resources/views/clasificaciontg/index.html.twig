@@ -1,0 +1,46 @@
+{% extends '::index.html.twig' %}
+{% block contenido %}
+    <h1>Lista de Clasificaciones</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Electiva</th>
+                <th>Descripcion</th>
+                <th>Asesoria</th>
+                <th>Estado</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for clasificaciontg in clasificaciontgs %}
+            <tr>
+                <td><a href="{{ path('clasificaciontg_show', { 'id': clasificaciontg.id }) }}">{{ clasificaciontg.id }}</a></td>
+                <td>{{ clasificaciontg.nombre }}</td>
+                <td>{{ clasificaciontg.electiva }}</td>
+                <td>{{ clasificaciontg.descripcion }}</td>
+                <td>{{ clasificaciontg.asesoria }}</td>
+                <td>{{ clasificaciontg.estado }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('clasificaciontg_show', { 'id': clasificaciontg.id }) }}">ver</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('clasificaciontg_edit', { 'id': clasificaciontg.id }) }}">editar</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('clasificaciontg_new') }}">Nueva Clasificacion</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,24 @@
+programas_index:
+    path:     /
+    defaults: { _controller: "UdecAppBundle:Programas:index" }
+    methods:  GET
+
+programas_show:
+    path:     /{id}/show
+    defaults: { _controller: "UdecAppBundle:Programas:show" }
+    methods:  GET
+
+programas_new:
+    path:     /new
+    defaults: { _controller: "UdecAppBundle:Programas:new" }
+    methods:  [GET, POST]
+
+programas_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "UdecAppBundle:Programas:edit" }
+    methods:  [GET, POST]
+
+programas_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "UdecAppBundle:Programas:delete" }
+    methods:  DELETE

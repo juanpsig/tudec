@@ -1,3 +1,19 @@
+udec_app_sedes:
+    resource: "@UdecAppBundle/Resources/config/routing/sedes.yml"
+    prefix:   /sedes
+
+udec_app_programas:
+    resource: "@UdecAppBundle/Resources/config/routing/programas.yml"
+    prefix:   /programas
+
+udec_app_clasificacion:
+    resource: "@UdecAppBundle/Resources/config/routing/clasificaciontg.yml"
+    prefix:   /clasificacion
+
+udec_app_personas:
+    resource: "@UdecAppBundle/Resources/config/routing/personas.yml"
+    prefix:   /personas
+
 udec_app_homepage:
     path:     /
     defaults: { _controller: UdecAppBundle:Default:index }
@@ -7,7 +23,7 @@ udec_app_trabajos_nuevo:
     defaults: { _controller: UdecAppBundle:Trabajos:nuevo }
 
 udec_app_trabajos_ver:
-    path:     /trabajo/crear
+    path:     /trabajo/ver
     defaults: { _controller: UdecAppBundle:Trabajos:ver }
 
 udec_app_trabajos_crear:
@@ -30,10 +46,10 @@ udec_app_trabajos_buscar:
     path:     /trabajo/buscar
     defaults: { _controller: UdecAppBundle:Trabajos:buscar }
 
-udec_app_personas_nuevo:
-    path:     /persona/nuevo
-    defaults: { _controller: UdecAppBundle:Personas:nuevo }
+#udec_app_personas_nuevo:
+#    path:     /persona/nuevo
+#    defaults: { _controller: UdecAppBundle:Personas:nuevo }
 
-udec_app_personas_buscar:
-    path:     /persona/buscar
-    defaults: { _controller: UdecAppBundle:Personas:buscar }
+#udec_app_personas_buscar:
+#    path:     /persona/buscar
+#    defaults: { _controller: UdecAppBundle:Personas:buscar }

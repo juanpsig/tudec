@@ -1,0 +1,24 @@
+personas_index:
+    path:     /
+    defaults: { _controller: "UdecAppBundle:Personas:index" }
+    methods:  GET
+
+personas_show:
+    path:     /{id}/show
+    defaults: { _controller: "UdecAppBundle:Personas:show" }
+    methods:  GET
+
+personas_new:
+    path:     /new
+    defaults: { _controller: "UdecAppBundle:Personas:new" }
+    methods:  [GET, POST]
+
+personas_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "UdecAppBundle:Personas:edit" }
+    methods:  [GET, POST]
+
+personas_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "UdecAppBundle:Personas:delete" }
+    methods:  DELETE

@@ -1,0 +1,46 @@
+{% extends '::index.html.twig' %}
+{% block contenido %}
+    <h1>Sedes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Tiposede</th>
+                <th>Municipio</th>
+                <th>Departamento</th>
+                <th>Estado</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sede in sedes %}
+            <tr>
+                <td><a href="{{ path('sedes_show', { 'id': sede.id }) }}">{{ sede.id }}</a></td>
+                <td>{{ sede.nombre }}</td>
+                <td>{{ sede.tipoSede }}</td>
+                <td>{{ sede.municipio }}</td>
+                <td>{{ sede.departamento }}</td>
+                <td>{{ sede.estado }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('sedes_show', { 'id': sede.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('sedes_edit', { 'id': sede.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('sedes_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

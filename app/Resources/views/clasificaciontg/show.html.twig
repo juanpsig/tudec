@@ -1,0 +1,47 @@
+{% extends '::index.html.twig' %}
+{% block contenido %}
+    <h1>Clasificaciontg</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ clasificaciontg.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ clasificaciontg.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Electiva</th>
+                <td>{{ clasificaciontg.electiva }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ clasificaciontg.descripcion }}</td>
+            </tr>
+            <tr>
+                <th>Asesoria</th>
+                <td>{{ clasificaciontg.asesoria }}</td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td>{{ clasificaciontg.estado }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('clasificaciontg_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('clasificaciontg_edit', { 'id': clasificaciontg.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

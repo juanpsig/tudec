@@ -1,0 +1,24 @@
+clasificaciontg_index:
+    path:     /
+    defaults: { _controller: "UdecAppBundle:Clasificaciontg:index" }
+    methods:  GET
+
+clasificaciontg_show:
+    path:     /{id}/show
+    defaults: { _controller: "UdecAppBundle:Clasificaciontg:show" }
+    methods:  GET
+
+clasificaciontg_new:
+    path:     /new
+    defaults: { _controller: "UdecAppBundle:Clasificaciontg:new" }
+    methods:  [GET, POST]
+
+clasificaciontg_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "UdecAppBundle:Clasificaciontg:edit" }
+    methods:  [GET, POST]
+
+clasificaciontg_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "UdecAppBundle:Clasificaciontg:delete" }
+    methods:  DELETE
