@@ -165,7 +165,7 @@ class trabajos {
         }
         $arc->setIdTrabajo($trabajo);
         $arc->setArticulo($docs['articulo']);
-        $arc->setAbstrc($docs['abstrac']);
+        //$arc->setAbstrc($docs['abstrac']);
         $arc->setResumen($docs['resumen']);
         $arc->setDoc($docs['documento']);
         $arc->setManualUsr($docs['manualu']);
@@ -177,4 +177,16 @@ class trabajos {
         return $arc;
     }
     
+    public function getInfoTrabajoAdjuntos($idTrabajo){
+        $query = "SELECT resumen,abstrc,articulo,doc,manual_tecn,manual_usr,codigo_sw,software
+                    FROM archivostg
+                    WHERE id_trabajo='$idTrabajo'";
+        $con = $this->em->getConnection()->prepare($query);
+        $con->execute();
+        $adjuntos = $con->fetchAll();
+        if($adjuntos){
+            return $adjuntos[0];
+        }
+        return false;
+    }
 }

@@ -22,3 +22,7 @@ personas_delete:
     path:     /{id}/delete
     defaults: { _controller: "UdecAppBundle:Personas:delete" }
     methods:  DELETE
+
+udec_app_personas_buscar:
+    path:     /buscar
+    defaults: { _controller: UdecAppBundle:Personas:buscar }

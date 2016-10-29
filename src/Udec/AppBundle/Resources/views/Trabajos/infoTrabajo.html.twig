@@ -2,5 +2,30 @@
     No. {{ idTrabajo }}<br>
     Titulo: {{ tituloTrabajo }}<br>
     Fecha Grado: {{ fechaGradoTrabajo }}<br>
-    
+    Concepto: {{ conceptoTrabajo }}<br>
+    Clasificación: {{ nombreClasificacion }}<br>
+    Autor(s): {{ nombrePersonaAutor }}<br>
+    Asesor(es): {{ nombrePersonaAsesor }}<br>
+    <h4>Adjuntos</h4>
+    {% if adjuntos.resumen %}
+        <a target="_blank" href="{{ path("udec_app_trabajos_ver_adjunto",{'archivo':adjuntos.resumen}) }}">Resumen</a><br>
+    {% endif %}
+    {% if adjuntos.articulo %}
+        <a target="_blank" href="{{ path("udec_app_trabajos_ver_adjunto",{'archivo':adjuntos.articulo}) }}">Artículo</a><br>
+    {% endif %}
+    {% if adjuntos.doc %}
+        <a target="_blank" href="{{ path("udec_app_trabajos_ver_adjunto",{'archivo':adjuntos.doc}) }}">Documento</a><br>
+    {% endif %}
+    {% if adjuntos.manual_tecn %}
+        <a target="_blank" href="{{ path("udec_app_trabajos_ver_adjunto",{'archivo':adjuntos.manual_tecn}) }}">Manual Técnico</a><br>
+    {% endif %}
+    {% if adjuntos.manual_usr %}
+        <a target="_blank" href="{{ path("udec_app_trabajos_ver_adjunto",{'archivo':adjuntos.manual_usr}) }}">Manual de Usuario</a><br>
+    {% endif %}
+    {% if adjuntos.codigo_sw %}
+        <a target="_blank" href="{{ path("udec_app_trabajos_ver_adjunto",{'archivo':adjuntos.codigo_sw}) }}">Código</a><br>
+    {% endif %}
+    {% if adjuntos.software %}
+        <a target="_blank" href="{{ path("udec_app_trabajos_ver_adjunto",{'archivo':adjuntos.software}) }}">Software</a><br>
+    {% endif %}
 </div>

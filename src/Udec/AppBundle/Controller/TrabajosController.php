@@ -2,6 +2,7 @@
 namespace Udec\AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 /*
@@ -65,6 +66,7 @@ class TrabajosController extends Controller {
         $rqt = $this->get("request");
         $infoTrabajo = $this->get("trabajos")->getInfoTrabajo($rqt->get('idTrabajo'));
         if($infoTrabajo){
+            $infoTrabajo['adjuntos'] = $this->get("trabajos")->getInfoTrabajoAdjuntos($rqt->get('idTrabajo'));
             return $this->render('UdecAppBundle:Trabajos:infoTrabajo.html.twig',$infoTrabajo);
         }
         return new Response('');
@@ -81,25 +83,43 @@ class TrabajosController extends Controller {
         $path = 'adjuntos/';
         $trabajo = $this->get("trabajos")->getTrabajo($idTrabajo);
         if($trabajo){
-            $archivo = $rqt->files->get('resumen');
-            $docs['resumen'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
-            $archivo = $rqt->files->get('abstrac');
-            $docs['abstrac'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
-            $archivo = $rqt->files->get('articulo');
-            $docs['articulo'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
-            $archivo = $rqt->files->get('documento');
-            $docs['documento'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
-            $archivo = $rqt->files->get('soft');
-            $docs['soft'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
-            $archivo = $rqt->files->get('codigof');
-            $docs['codigof'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
-            $archivo = $rqt->files->get('manualt');
-            $docs['manualt'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
-            $archivo = $rqt->files->get('manualu');
-            $docs['manualu'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
-            
+            $docs = array('resumen'=>null,'articulo'=>null,'documento'=>null,'soft'=>null,'codigof'=>null,'manualt'=>null,'manualu'=>null);
+            if($rqt->files->get('resumen')){
+                $archivo = $rqt->files->get('resumen');
+                $docs['resumen'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
+            }
+            if($rqt->files->get('articulo')){
+                $archivo = $rqt->files->get('articulo');
+                $docs['articulo'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
+            }
+            if($rqt->files->get('documento')){
+                $archivo = $rqt->files->get('documento');
+                $docs['documento'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
+            }
+            if($rqt->files->get('soft')){
+                $archivo = $rqt->files->get('soft');
+                $docs['soft'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
+            }
+            if($rqt->files->get('codigof')){
+                $archivo = $rqt->files->get('codigof');
+                $docs['codigof'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
+            }
+            if($rqt->files->get('manualt')){
+                $archivo = $rqt->files->get('manualt');
+                $docs['manualt'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
+            }
+            if($rqt->files->get('manualu')){
+                $archivo = $rqt->files->get('manualu');
+                $docs['manualu'] = $this->get("trabajos")->uploadArchivo($archivo,$path);
+            }
             $this->get("trabajos")->guardarDocumentos($trabajo,$docs);
         }
         return new Response('ok');
+    }
+    
+    public function descargarAdjuntoAction($archivo){
+        $pathLocal = $this->getParameter('path_local');
+        $file = $pathLocal.'/web/adjuntos/'.$archivo;
+        return new BinaryFileResponse($file);
     }
 }

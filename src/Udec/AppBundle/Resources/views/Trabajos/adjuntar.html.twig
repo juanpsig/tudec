@@ -9,9 +9,6 @@
                 Resumen: <input type="file" name="resumen" id="resumen" />
             </div>
             <div class="col-md-12">
-                Abstrac: <input type="file" name="abstrac" id="abstrac" />
-            </div>
-            <div class="col-md-12">
                 Articulo: <input type="file" name="articulo" id="articulo" />
             </div>
             <div class="col-md-12">
@@ -47,8 +44,6 @@
     function uploadAjax(){
         var inputFile = document.getElementById("resumen");
         var resumen = inputFile.files[0];
-        inputFile = document.getElementById("abstrac");
-        var abstrac = inputFile.files[0];
         inputFile = document.getElementById("articulo");
         var articulo = inputFile.files[0];
         inputFile = document.getElementById("documento");
@@ -64,7 +59,6 @@
         
         var data = new FormData();
         data.append('resumen',resumen);
-        data.append('abstrac',abstrac);
         data.append('articulo',articulo);
         data.append('documento',documento);
         data.append('soft',soft);

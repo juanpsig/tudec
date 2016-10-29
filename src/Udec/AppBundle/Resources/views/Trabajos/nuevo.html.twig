@@ -125,7 +125,7 @@
             listarAsesores:function(){
                 $('#asesoresAgregados').html('');
                 $.each(accion.asesores,function(inx,vlr){
-                    $('#asesoresAgregados').append('[<i class="fa fa-user"></i> '+vlr.nombre+' <a href="javascript:accion.quitarAsesor(\''+vlr.id+'\')"><i class="fa fa-close"></i></a>] ');
+                    $('#asesoresAgregados').append('[<i class="fa fa-user"></i> '+vlr.nombre+' <a href="javascript:accion.quitarAsesor(\''+vlr.id+'\')"><i class="fa fa-close"></i></a>] colocar radio buttons para tipo de asesor');
                 });
             },
             crearTrabajo:function(){

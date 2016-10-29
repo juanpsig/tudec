@@ -46,6 +46,10 @@ udec_app_trabajos_buscar:
     path:     /trabajo/buscar
     defaults: { _controller: UdecAppBundle:Trabajos:buscar }
 
+udec_app_trabajos_ver_adjunto:
+    path:     /trabajo/adjunto/{archivo}
+    defaults: { _controller: UdecAppBundle:Trabajos:descargarAdjunto }
+
 #udec_app_personas_nuevo:
 #    path:     /persona/nuevo
 #    defaults: { _controller: UdecAppBundle:Personas:nuevo }
