@@ -125,10 +125,13 @@
             listarAsesores:function(){
                 $('#asesoresAgregados').html('');
                 $.each(accion.asesores,function(inx,vlr){
-                    $('#asesoresAgregados').append('[<i class="fa fa-user"></i> '+vlr.nombre+' <a href="javascript:accion.quitarAsesor(\''+vlr.id+'\')"><i class="fa fa-close"></i></a>] colocar radio buttons para tipo de asesor');
+                    $('#asesoresAgregados').append('[<i class="fa fa-user"></i> '+vlr.nombre+' <a href="javascript:accion.quitarAsesor(\''+vlr.id+'\')"><i class="fa fa-close"></i></a>]  <input type="radio" name="tipAsesor'+vlr.id+'" value="director"> Director <input type="radio" name="tipAsesor'+vlr.id+'" value="jurado"> Jurado <input type="radio" name="tipAsesor'+vlr.id+'" value="metodologico"> Metodológico<br>');
                 });
             },
             crearTrabajo:function(){
+                $.each(accion.asesores,function(inx,vlr){
+                    accion.asesores[inx].tipo = $('input:radio[name=tipAsesor'+vlr.id+']:checked').val();
+                });
                 var datos = {titulo:$('#dtitulo').val(),concepto:$('#dconcepto').val(),fechaGrado:$('#dfechaGrado').val(),carrera:$('#dcarrera').val(),clasificacion:$('#dclasificacion').val(),autores:accion.autores,asesores:accion.asesores};
                 $.post('{{ path("udec_app_trabajos_crear") }}',{datos:datos},function(res){
                     try{

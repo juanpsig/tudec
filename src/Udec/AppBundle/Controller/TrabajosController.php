@@ -28,7 +28,7 @@ class TrabajosController extends Controller {
         $rqt = $this->get("request");
         if($rqt->get("acc")){
             $text = str_replace(' ','%',$rqt->get('txtkey'));
-            $info = $this->queryTrabajos("WHERE tb.titulo like'%$text%'");
+            $info = $this->queryTrabajos("WHERE CONCAT_WS(' ',tb.titulo,ps.primer_nombre,ps.segundo_nombre,ps.primer_apellido,ps.segundo_apellido) like'%$text%'");
             return $this->render('UdecAppBundle:Trabajos:listBuscar.html.twig',array('info'=>$info));
         }else{
             $info = $this->queryTrabajos('');

@@ -77,7 +77,7 @@ class trabajos {
         $query = "SELECT tg.id idTrabajo,tg.titulo tituloTrabajo,tg.concepto conceptoTrabajo,tg.fecha_grado fechaGradoTrabajo
                     ,au.id idAutor,ae.id idAsesor,pg.id idPrograma,pg.nombre nombrePrograma,cl.id idClasificacion,cl.nombre nombreClasificacion
                     ,pau.id idPersonaAutor, GROUP_CONCAT(DISTINCT(CONCAT_WS(' ',pau.primer_nombre,pau.segundo_nombre,pau.primer_apellido,pau.segundo_apellido))) nombrePersonaAutor  
-                    ,pae.id idPersonaAsesor,GROUP_CONCAT(DISTINCT(CONCAT_WS(' ',pae.primer_nombre,pae.segundo_nombre,pae.primer_apellido,pae.segundo_apellido))) nombrePersonaAsesor  
+                    ,pae.id idPersonaAsesor,GROUP_CONCAT(DISTINCT(CONCAT_WS(' ',pae.primer_nombre,pae.segundo_nombre,pae.primer_apellido,pae.segundo_apellido)),'-',IF(director,'Director',IF(jurado,'JURADO',IF(asesmetd,'Metodológico','')))) nombrePersonaAsesor  
                     FROM trabgrado tg
                     INNER JOIN autores au ON au.id_trabajo = tg.id
                     INNER JOIN asesores ae ON ae.id_trabajo = tg.id
@@ -142,6 +142,15 @@ class trabajos {
                 $asesor->setEstado('1');
                 $asesor->setIdPersona($persona);
                 $asesor->setIdTrabajo($trabajo);
+                if($item['tipo']=='jurado'){
+                    $asesor->setJurado('1');
+                }
+                if($item['tipo']=='director'){
+                    $asesor->setDirector('1');
+                }
+                if($item['tipo']=='metodologico'){
+                    $asesor->setAsesmetd('1');
+                }
                 $this->em->persist($asesor);
             }
         }
